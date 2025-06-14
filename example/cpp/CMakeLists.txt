@@ -16,3 +16,7 @@ target_link_libraries(preview_usb ${CXXLIBS} ${OpenCV_LIBS})
 aux_source_directory(example DIR_SRCS)
 add_executable(example ${DIR_SRCS})
 target_link_libraries(example ${CXXLIBS} ${OpenCV_LIBS})
+
+add_executable(face_identifier face_identifier.cpp)
+target_include_directories(face_identifier PRIVATE ${CMAKE_SOURCE_DIR}/third_party/insightface ${OpenCV_INCLUDE_DIRS})
+target_link_libraries(face_identifier ${CXXLIBS} ${OpenCV_LIBS})

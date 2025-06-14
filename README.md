@@ -15,6 +15,8 @@ Clone this repository and enter the directory.
 ```shell
   git clone https://github.com/ArduCAM/Arducam_tof_camera.git
   cd Arducam_tof_camera
+  # clone InsightFace for C++ face recognition
+  git clone https://github.com/deepinsight/insightface.git third_party/insightface
 ```
 
 ### Install dependencies for Raspberry Pi
@@ -63,6 +65,9 @@ Clone this repository and enter the directory.
   python3 preview_depth.py
   #or
   python3 capture_raw.py
+  #or
+  python3 insightface_register.py
+  # Press 'r' to save a face embedding and quit with 'q'
 ```
 
 #### C/C++
@@ -101,6 +106,8 @@ Clone this repository and enter the directory.
   ./preview_depth
   #or
   ./capture_raw
+  #or
+  ./face_identifier  # register or identify faces using InsightFace
 ```
 
 ### Point Cloud Examples
