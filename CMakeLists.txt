@@ -15,3 +15,7 @@ set(CXXLIBS ArducamDepthCamera::ArducamDepthCamera)
 
 add_subdirectory(example)
 add_subdirectory(open3d_preview)
+
+add_subdirectory(third_party/insightface/cpp)   # cpp 또는 cpp-package 실제 경로
+target_link_libraries(your_app
+        PRIVATE insightface onnxruntime OpenCV::opencv)
