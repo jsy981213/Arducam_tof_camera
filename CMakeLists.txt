@@ -1,21 +1,33 @@
-cmake_minimum_required(VERSION 3.4)
+cmake_minimum_required(VERSION 3.16)
+project(TOFCameraExample LANGUAGES CXX)
 
-project(TOFCameraExample)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# /home/user/workspace/tof/arducam_tof_sdk/install/lib/cmake/ArducamDepthCamera/ArducamDepthCameraConfig.cmake
-# set(ArducamDepthCamera_DIR "/home/user/workspace/tof/arducam_tof_sdk/install/lib/cmake/ArducamDepthCamera")
+find_package(OpenCV REQUIRED)
 find_package(ArducamDepthCamera REQUIRED)
 
-set(CLIBS ArducamDepthCamera::ArducamDepthCamera4C)
-set(CXXLIBS ArducamDepthCamera::ArducamDepthCamera)
+add_subdirectory(third_party/insightface/cpp-package/inspireface)
 
-# include_directories(${INC_DIR})
-# include_directories("/usr/local/include")
-# link_directories("/usr/local/lib")
+add_executable(face_app src/face_app.cpp)
 
-add_subdirectory(example)
-add_subdirectory(open3d_preview)
+target_include_directories(face_app PRIVATE
+    /usr/local/onnxruntime/include
+    third_party/insightface/cpp/include
+)
+target_link_directories(face_app PRIVATE
+    /usr/local/onnxruntime/lib
+)
 
-add_subdirectory(third_party/insightface/cpp)   # cpp 또는 cpp-package 실제 경로
-target_link_libraries(your_app
-        PRIVATE insightface onnxruntime OpenCV::opencv)
+target_link_libraries(face_app
+    PRIVATE
+        ArducamDepthCamera::ArducamDepthCamera
+        insightface
+        onnxruntime
+        ${OpenCV_LIBS}
+)
+
+target_compile_definitions(face_app PRIVATE
+    MODEL_DIR="${CMAKE_SOURCE_DIR}/third_party/insightface/models"
+)
+
