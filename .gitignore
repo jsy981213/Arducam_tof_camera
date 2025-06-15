@@ -14,3 +14,4 @@ build/
 *.patch
 /*.json
 /cali.bin
+third_party/insightface/models/
